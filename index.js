@@ -37,3 +37,18 @@ await client.schema
 const schemaRes = await client.schema.getter().do();
 
 console.log(schemaRes)
+
+const dir = "./search/test.jpg"
+
+const test = Buffer.from(readFileSync(dir)).toString('base64');
+
+const resImage = await client.graphql.get()
+    .withClassName('Meme')
+    .withFields(['image'])
+    .withNearImage({ image: test })
+    .withLimit(1)
+    .do();
+
+// Write result to filesystem
+const result = resImage.data.Get.Meme[0].image;
+writeFileSync('./result.jpg', result, 'base64');
