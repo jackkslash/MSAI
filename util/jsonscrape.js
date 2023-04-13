@@ -5,12 +5,6 @@ const filepath = './memes.json';
 
 const dir = './memes/';
 
-// if (!fs.existsSync(dir)){
-//   fs.mkdirSync(dir);
-//   console.log('Folder Created Successfully.');
-// }
-
-
 fs.readFile(filepath, 'utf-8')
   .then(data => {
 
