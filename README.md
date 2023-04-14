@@ -20,5 +20,10 @@ node util/imageScrape.js
 Upload the images in the new directory into the [Weaviate](https://weaviate.io/) vector database ready to be searched:
 
 ```
-node util/imgUpload.js
+node util/imageUpload.js
+```
+
+Only after storing the image in the search folder can you run this command to search for similar images.
+```
+node index.js
 ```

@@ -1,3 +1,4 @@
+import fs from 'fs'
 import weaviate from 'weaviate-ts-client';
 
 const client = weaviate.client({
@@ -28,27 +29,37 @@ const schemaConfig = {
     ]
 }
 
-await client.schema
-    .classCreator()
-    .withClass(schemaConfig)
-    .do();
 
+//Delete Schema
+// const schemaRes = client.schema
+//     .classDeleter()
+//     .withClassName('Meme')
+//     .do();
 
 const schemaRes = await client.schema.getter().do();
+
+//Create schema
+// await client.schema
+//     .classCreator()
+//     .withClass(schemaConfig)
+//     .do();
+
 
 console.log(schemaRes)
 
 const dir = "./search/test.jpg"
 
-const test = Buffer.from(readFileSync(dir)).toString('base64');
+// const test = Buffer.from(readFileSync(dir)).toString('base64');
+const img = fs.readFileSync(dir);
+const b64 = Buffer.from(img).toString('base64');
 
 const resImage = await client.graphql.get()
     .withClassName('Meme')
     .withFields(['image'])
-    .withNearImage({ image: test })
+    .withNearImage({ image: b64})
     .withLimit(1)
     .do();
 
 // Write result to filesystem
 const result = resImage.data.Get.Meme[0].image;
-writeFileSync('./result.jpg', result, 'base64');
+fs.writeFileSync('./search/result.jpg', result, 'base64');
