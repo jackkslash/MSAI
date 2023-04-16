@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "node util/jsonScrape.js https://api.imgflip.com/get_memes && node util/imageScrape.js && noe util/imageUpload,js",
-    "run": "npm setup && node index"
+    "search": "node index.js"
   },
   "keywords": [],
   "author": "",

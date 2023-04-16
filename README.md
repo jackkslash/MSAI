@@ -8,22 +8,14 @@ Set up for use:
 npm install
 docker-compose up -d
 ```
-Create a JSON file from the provide JSON URL:
-```
-node util/jsonScrape.js https://api.imgflip.com/get_memes
-```
-
-Scrape JSON file for all images into a new directory:
-```
-node util/imageScrape.js
-```
-Upload the images in the new directory into the [Weaviate](https://weaviate.io/) vector database ready to be searched:
+This command sets up all needed boiler plate ready for search use. 
 
 ```
-node util/imageUpload.js
+npm setup
 ```
 
-Only after storing the image in the search folder can you run this command to search for similar images.
+These command is the commnad needed once the search folder and file is in place, this will commence the search.
+
 ```
-node index.js
+npm search
 ```
